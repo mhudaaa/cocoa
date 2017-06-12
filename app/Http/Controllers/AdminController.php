@@ -77,7 +77,7 @@ class AdminController extends Controller{
         $kriteria->kriteria = $request->kriteria;
         $kriteria->nilai    = $request->nilai;
         $kriteria->save();
-        return redirect('/admin/subkriteria')->with('message', 'Kriteria berhasil diubah.');
+        return redirect('/admin/kriteria')->with('message', 'Kriteria berhasil diubah.');
     }
 
     public function viewUbahSubkriteria($id){
@@ -147,6 +147,51 @@ class AdminController extends Controller{
     public function setSubkriteria(Request $request){
         Subkriteria::create($request->all());
         return redirect('/admin/subkriteria/get/'.$request->id_kriteria)->with('message', 'Data berhasil ditambahkan.');
+    }
 
+    public function viewNilaiMutu(){
+        $kriterias = Kriteria::all();
+        $subs = Subkriteria::all();
+        return view('admin/nilai-mutu', compact('kriterias', 'subs'));
+    }
+
+
+    public function setNilaiMutu(Request $request){
+        $jmlKriteria = Kriteria::count();
+        $bobot       = Kriteria::select('bobotSAW')->get(); 
+        $data1 = array();
+        $data2 = array();
+        $data3 = array();
+        $hasil1 = 0;
+        $hasil2 = 0;
+        $hasil3 = 0;
+
+        // Memasukkan data ke array
+        for ($x=1; $x <= 3; $x++) { 
+            for ($i=0; $i < $jmlKriteria; $i++) { 
+                ${'data' . $x}[$i] = $request->{($i+1) . $x};
+            }
+        }
+
+        // Menghitung hasil tiap data
+        for ($i=1; $i <= 3; $i++) { 
+            for ($j=0; $j < $jmlKriteria; $j++) { 
+                ${'hasil'. $i} += (${'data'.$i}[$j] * $bobot[$j]->bobotSAW);
+            }
+        }
+        
+        // Pengurutan nilai mutu
+        $hasil = [$hasil1 * 10, $hasil2 * 10, $hasil3 * 10];
+        rsort($hasil);
+
+        // Ubah data penilaian mutu
+        $i = 1;
+        while ($i <= 3) {
+            $mutu = Mutu::where('id_mutu', $i)->first();
+            $mutu->nilaimutu = $hasil[$i-1];
+            $mutu->save();
+            $i++;
+        }
+        return redirect('/admin/penilaian')->with('message', 'Mutu berhasil disimpan.');
     }
 }

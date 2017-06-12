@@ -26,8 +26,10 @@ Route::get('/admin/mutu-panen/rincian/{id}', 'AdminController@rincianMutuPanen')
 
 // Penilaian
 Route::get('/admin/penilaian', 'AdminController@getPenilaian');
-Route::get('/admin/penilaian/ubah/{id}', 'AdminController@getDataPenilaian');
-Route::post('/admin/penilaian/set/{id}', 'AdminController@setUpdatePenilaian');
+Route::get('/admin/penilaian/tambah', 'AdminController@viewNilaiMutu');
+Route::post('/admin/penilaian/set', 'AdminController@setNilaiMutu');
+// Route::get('/admin/penilaian/ubah/{id}', 'AdminController@getDataPenilaian');
+// Route::post('/admin/penilaian/set/{id}', 'AdminController@setUpdatePenilaian');
 
 // Pengaturan Kriteria
 Route::get('/admin/kriteria', 'AdminController@kriteria');

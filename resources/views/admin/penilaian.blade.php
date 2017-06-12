@@ -9,6 +9,9 @@
 				<div class="col-xs-6 text-center">
 					<h6 class="title text-brown">Mutu</h6>						
 				</div>
+				<div class="col-xs-3 no-padding-right">
+					<a href="/admin/penilaian/tambah"><img class="icon icon-right" src="{{ URL::asset('assets/img/plus.png') }}"></a>
+				</div>
 			</div>
 
 			<div class="row">
@@ -26,18 +29,12 @@
 						<thead>
 							<th>Nilai</th>
 							<th>Mutu</th>
-							<th></th>
 						</thead>
 						<tbody>
 							@foreach($mutus as $mutu)
 							<tr>
 								<td>{{ $mutu->nilaimutu }}</td>
 								<td>{{ $mutu->mutu }}</td>
-								<td class="text-right">
-									<a href="/admin/penilaian/ubah/{{ $mutu->id_mutu }}">
-										<b>ubah</b>
-									</a>
-								</td>
 							</tr>
 							@endforeach
 						</tbody>

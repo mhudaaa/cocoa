@@ -47,19 +47,15 @@ class PengujiController extends Controller{
         	$util[$i-1]		= $request->$i;
         }
 
-        print_r($util);
-
         // Penentuan mutu
         $mutu = "III";
 
-        if ($hasil >= $getMutu[0]->nilaimutu) {
+        if ($hasil <= $getMutu[0]->nilaimutu && $hasil > $getMutu[1]->nilaimutu ) {
             $mutu = "I";
-        } elseif($hasil < $getMutu[0]->nilaimutu && $hasil >= $getMutu[1]->nilaimutu){
+        } elseif($hasil <= $getMutu[1]->nilaimutu && $hasil > $getMutu[2]->nilaimutu){
             $mutu = "II";
-        } elseif($hasil < $getMutu[1]->nilaimutu && $hasil >= $getMutu[2]->nilaimutu){
+        } elseif($hasil <= $getMutu[2]->nilaimutu){
             $mutu = "III";
-        } elseif($hasil < $getMutu[2]->nilaimutu){
-        	$mutu = "-";
         }
 
         // Cari jumlah kriteria
