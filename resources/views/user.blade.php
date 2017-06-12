@@ -1,0 +1,1 @@
+login sebagai : {{ Session::get('user') }}

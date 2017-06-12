@@ -1,0 +1,59 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('splash');
+});
+Route::post('/login', 'LoginsController@setLogin');
+
+Route::get('/dashboard', 'AdminController@index');
+
+// Mutu Panen
+Route::get('/mutu-panen', 'PanenController@index');
+Route::get('/mutu-panen/rincian/{id}', 'PanenController@rincianMutuPanen');
+Route::get('/mutu-panen/tambah', 'PanenController@viewTambahPanen');
+
+Route::post('/mutu-panen/set', 'PanenController@setMutuPanen');
+Route::get('/mutu-panen/hapus/{id}', 'PanenController@hapusMutuPanen');
+
+// Mutu Biji
+Route::get('/mutu-biji', function () {
+    return view('mutu-biji');
+});
+Route::get('/mutu-biji/rincian', function () {
+    return view('rincian-mutu-biji');
+});
+Route::get('/mutu-biji/tambah', function () {
+    return view('tambah-mutu-biji');
+});
+
+
+// Pengaturan Kriteria
+Route::get('/kriteria', 'KriteriaController@index');
+Route::get('/kriteria/tambah', function () {
+    return view('tambah-kriteria');
+});
+Route::post('/kriteria/set', 'KriteriaController@setKriteria');
+Route::get('/kriteria/hapus/{id}', 'KriteriaController@hapusKriteria');
+Route::get('/kriteria/ubah', function () {
+    return view('ubah-kriteria');
+});
+
+
+// Pengaturan Subkriteria
+Route::get('/subkriteria/get/{id}', 'KriteriaController@subkriteria');
+Route::get('/subkriteria/tambah/{id}', 'KriteriaController@viewTambahSubkriteria');
+Route::post('/subkriteria/set', 'KriteriaController@setSubkriteria');
+Route::get('/subkriteria/ubah', function () {
+    return view('ubah-subkriteria');
+});
