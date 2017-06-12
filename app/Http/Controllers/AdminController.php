@@ -182,7 +182,11 @@ class AdminController extends Controller{
         
         // Pengurutan nilai mutu
         $hasil = [$hasil1 * 10, $hasil2 * 10, $hasil3 * 10];
+        $simpanHasil = collect($hasil);
+        $request->session()->put('mutu', $simpanHasil);
+
         rsort($hasil);
+        $request->session()->put('sortdmutu', $hasil);
 
         // Ubah data penilaian mutu
         $i = 1;
@@ -192,6 +196,6 @@ class AdminController extends Controller{
             $mutu->save();
             $i++;
         }
-        return redirect('/admin/penilaian')->with('message', 'Mutu berhasil disimpan.');
+        return redirect('/admin/penilaian/hasil');
     }
 }

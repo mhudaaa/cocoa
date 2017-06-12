@@ -28,6 +28,7 @@ Route::get('/admin/mutu-panen/rincian/{id}', 'AdminController@rincianMutuPanen')
 Route::get('/admin/penilaian', 'AdminController@getPenilaian');
 Route::get('/admin/penilaian/tambah', 'AdminController@viewNilaiMutu');
 Route::post('/admin/penilaian/set', 'AdminController@setNilaiMutu');
+Route::get('/admin/penilaian/hasil', function () {return view('admin/hasil-penilaian'); });
 // Route::get('/admin/penilaian/ubah/{id}', 'AdminController@getDataPenilaian');
 // Route::post('/admin/penilaian/set/{id}', 'AdminController@setUpdatePenilaian');
 
