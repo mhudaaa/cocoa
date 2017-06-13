@@ -31,11 +31,13 @@
 							<th>Mutu</th>
 						</thead>
 						<tbody>
-							@foreach($mutus as $mutu)
+							<? $no=0 ?>
+							@foreach($mutus as $no=>$mutu)
 							<tr>
-								<td>{{ $mutu->nilaimutu }}</td>
+								<td>{{ $mutu->nilaimutu }} - {{ $mutu->nilaimutu[$no] }}</td>
 								<td>{{ $mutu->mutu }}</td>
 							</tr>
+							<? $no++; ?>
 							@endforeach
 						</tbody>
 					</table>

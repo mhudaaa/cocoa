@@ -9,7 +9,7 @@ class Panen extends Model{
     public $timestamps		= false;
 
     protected $fillable = [
-		'tgl_uji', 'berat', 'mutu'
+		'tgl_uji', 'berat', 'hasil', 'mutu'
 	];
 
 }

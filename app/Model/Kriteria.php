@@ -9,6 +9,6 @@ class Kriteria extends Model{
     public $timestamps		= false;
 
     protected $fillable = [
-		'kriteria', 'nilai', 'bobot', 'normalisasi', 'bobotWMA'
+		'kriteria', 'nilai', 'bobotSAW'
 	];
 }

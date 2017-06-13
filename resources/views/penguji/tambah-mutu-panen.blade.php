@@ -34,11 +34,12 @@
 								<th width="100px">Hasil</th>
 							</thead>
 							<tbody>
+								<? $no = 1 ?>
 								@foreach($kriterias as $kriteria)
 								<tr class="left-all">
 									<td>{{ $kriteria->kriteria }}</td>
 									<td>
-										<select name="{{ $kriteria->id_kriteria }}" required="">
+										<select name="{{ $no++ }}" required="">
 											<option value="" disabled="" selected="">Pilih Nilai</option>
 											@foreach($subs as $sub)
 											@if($kriteria->id_kriteria == $sub->id_kriteria)

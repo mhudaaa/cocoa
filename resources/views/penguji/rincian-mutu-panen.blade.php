@@ -28,12 +28,14 @@
 					<table>
 						<thead>
 							<th class="left">Kriteria</th>
+							<th>Nilai</th>
 							<th class="text-right">Utility</th>
 						</thead>
 						<tbody>
 							@for($i = 0; $i < $jmlKriteria; $i++)
 							<tr>
 								<td class="left">{{ $rincian[$i]->kriteria->kriteria }}</td>
+								<td>{{ $rincian[$i]->getSub->subkriteria }}</td>
 								<td class="text-right">{{ $rincian[$i]->utility }}</td>
 							</tr>
 							@endfor
@@ -42,6 +44,10 @@
 					<hr>
 					<table>
 						<tbody>
+							<tr>
+								<td class="left">Nilai :</td>
+								<td class="text-right"><b>{{ substr($panen->hasil, 0, 5) }}</b></td>
+							</tr>
 							<tr>
 								<td class="left"><b>Hasil Pengujian :</b></td>
 								<td class="text-right"><b>Mutu {{ $panen->mutu }}</b></td>

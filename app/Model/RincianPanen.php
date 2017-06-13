@@ -15,4 +15,8 @@ class RincianPanen extends Model{
 	public function kriteria(){
 		return $this->belongsTo(Kriteria::class, 'id_kriteria');
 	}
+
+	public function getSub(){
+		return $this->belongsTo(Subkriteria::class, 'id_subkriteria');
+	}
 }

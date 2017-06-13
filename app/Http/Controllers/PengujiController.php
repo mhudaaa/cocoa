@@ -23,34 +23,36 @@ class PengujiController extends Controller{
     	return view('penguji/mutu-panen', compact('panens'));
     }
 
+    // melihat form data panen
     public function viewTambahPanen(){
         $kriterias = Kriteria::all();
         $subs = Subkriteria::all();
         return view('penguji/tambah-mutu-panen', compact('kriterias', 'subs'));
     }
 
+    // mengatur mutu panen
     public function setMutuPanen(Request $request){
 
-    	$getNormalisasi = Kriteria::select('normalisasi')->get();
+        $getNormalisasi = Kriteria::select('normalisasi')->get();
+    	$getIdKriteria  = Kriteria::select('id_kriteria')->get();
     	$getMutu		= Mutu::select('nilaimutu')->get();
+        $jmlKriteria    = Kriteria::count();
 
-    	$hasil = 0;
-    	$util = array();
+        $hasil = 0;
+        $util = array();
 
-    	// Cari jumlah kriteria
-        $jmlKriteria = Kriteria::count();
         for ($i=1; $i <= $jmlKriteria; $i++) { 
         	$normalisasi 	= $getNormalisasi[$i-1]->normalisasi;
         	$utility		= $request->$i;
         	$nsementara		= $normalisasi * $utility;
         	$hasil 		   += ($nsementara);
-        	$util[$i-1]		= $request->$i;
+            $util[$i-1]     = $request->$i;
         }
 
         // Penentuan mutu
-        $mutu = "III";
+        $mutu = "I";
 
-        if ($hasil <= $getMutu[0]->nilaimutu && $hasil > $getMutu[1]->nilaimutu ) {
+        if ($hasil <= ($getMutu[0]->nilaimutu) && $hasil > $getMutu[1]->nilaimutu ) {
             $mutu = "I";
         } elseif($hasil <= $getMutu[1]->nilaimutu && $hasil > $getMutu[2]->nilaimutu){
             $mutu = "II";
@@ -62,6 +64,7 @@ class PengujiController extends Controller{
         $panen = [
             'berat' => $request->berat,
             'mutu' => $mutu,
+            'hasil' => $hasil
         ];
         $subs = Panen::create($panen);
 
@@ -69,8 +72,13 @@ class PengujiController extends Controller{
         $i = 0;
         while($i < $jmlKriteria) {
             $rpanen = new RincianPanen();
+            $getIdSub = Subkriteria::where([
+                            ['utility', $util[$i]],
+                            ['id_kriteria', $getIdKriteria[$i]->id_kriteria]
+                        ])->first();
             $rpanen->id_panen = $subs->id_panen;
-            $rpanen->id_kriteria = ($i + 1);
+            $rpanen->id_kriteria = $getIdKriteria[$i]->id_kriteria;
+            $rpanen->id_subkriteria = $getIdSub->id_subkriteria;
             $rpanen->utility = $util[$i];
             $rpanen->save();
             $i++;
@@ -79,14 +87,15 @@ class PengujiController extends Controller{
     	return redirect('penguji/mutu-panen')->with('message', 'Data berhasil ditambahkan.');
     }
 
+    // menampilkan rincian mutu panen
     public function rincianMutuPanen($id){
     	$jmlKriteria   = RincianPanen::where('id_panen', $id)->count();
         $panen         = Panen::find($id);
-        $rincian       = RincianPanen::where("id_panen", "=", $id)->get();
+        $rincian       = RincianPanen::where("id_panen", $id)->get();
         return view('penguji/rincian-mutu-panen', compact('panen', 'rincian', 'jmlKriteria'));
     }
 
-
+    // hapus mutu panen
     public function hapusMutuPanen($id){
         $panen         = Panen::where('id_panen', $id)->delete();
         $rincianPanen  = RincianPanen::where('id_panen', $id)->delete();

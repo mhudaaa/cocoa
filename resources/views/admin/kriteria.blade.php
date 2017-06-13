@@ -42,6 +42,12 @@
 								</td>
 							</tr>
 							@endforeach
+							<tr>
+								<td class="text-right"><hr><b>Jumlah Bobot :</b></td>
+								<td><hr><b>{{ $totalBobot }}</b></td>
+								<td></td>
+								<td></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

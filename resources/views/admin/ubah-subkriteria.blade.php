@@ -8,7 +8,7 @@
 					<h6 class="title">Ubah Subkriteria</h6>						
 				</div>
 				<div class="col-xs-2 no-padding-right">
-					<a href="/admin/kriteria"><img class="icon icon-right" src="{{ URL::asset('assets/img/close-2.png') }}"></a>
+					<a href="/admin/subkriteria/get/{{ $subkriteria->id_kriteria }}"><img class="icon icon-right" src="{{ URL::asset('assets/img/close-2.png') }}"></a>
 				</div>
 			</div>
 

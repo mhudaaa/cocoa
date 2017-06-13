@@ -25,6 +25,7 @@
 								<tr class="left-all">
 									<td class="text-brown bold">Nilai</td>
 									<td><input type="number" name="nilai" required=""></td>
+									<td><input type="hidden" name="bobotSAW" value="1"></td>
 								</tr>
 							</tbody>
 						</table>

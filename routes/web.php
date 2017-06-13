@@ -29,8 +29,6 @@ Route::get('/admin/penilaian', 'AdminController@getPenilaian');
 Route::get('/admin/penilaian/tambah', 'AdminController@viewNilaiMutu');
 Route::post('/admin/penilaian/set', 'AdminController@setNilaiMutu');
 Route::get('/admin/penilaian/hasil', function () {return view('admin/hasil-penilaian'); });
-// Route::get('/admin/penilaian/ubah/{id}', 'AdminController@getDataPenilaian');
-// Route::post('/admin/penilaian/set/{id}', 'AdminController@setUpdatePenilaian');
 
 // Pengaturan Kriteria
 Route::get('/admin/kriteria', 'AdminController@kriteria');
@@ -44,6 +42,7 @@ Route::post('/admin/kriteria/setUpdate/{id}', 'AdminController@setUpdateKriteria
 Route::get('/admin/subkriteria/get/{id}', 'AdminController@subkriteria');
 Route::get('/admin/subkriteria/tambah/{id}', 'AdminController@viewTambahSubkriteria');
 Route::get('/admin/subkriteria/ubah/{id}', 'AdminController@viewUbahSubkriteria');
+Route::get('/admin/subkriteria/hapus/{idKriteria}/{idSub}', 'AdminController@hapusSubkriteria');
 Route::post('/admin/subkriteria/set', 'AdminController@setSubkriteria');
 Route::post('/admin/subkriteria/setUpdate/{id}', 'AdminController@setUpdateSubkriteria');
 

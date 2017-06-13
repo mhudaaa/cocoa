@@ -35,7 +35,8 @@
 						<thead class="text-brown">
 							<th class="left">Subkriteria</th>
 							<th>Nilai</th>
-							<th></th>
+							<th width="40px"></th>
+							<th width="25px"></th>
 						</thead>
 						<tbody>
 
@@ -43,9 +44,14 @@
 							<tr>
 								<td class="left">{{ $sub->subkriteria }}</td>
 								<td>{{ $sub->utility }}</td>
-								<td>
+								<td class="text-right">
 									<a href="/admin/subkriteria/ubah/{{ $sub->id_subkriteria }}">
 										<img src="{{ URL::asset('assets/img/edit.png') }}">
+									</a>
+								</td>
+								<td class="text-right">
+									<a href="/admin/subkriteria/hapus/{{ $sub->id_kriteria }}/{{ $sub->id_subkriteria }}">
+										<img src="{{ URL::asset('assets/img/delete.png') }}">
 									</a>
 								</td>
 							</tr>
@@ -55,7 +61,7 @@
 				</div>
 				<div class="text-center">
 					<a href="/admin/kriteria/hapus/{{ $kriteria->id_kriteria }}">
-						<button class="btn btn-center bg-brown-3 btn-rounded">Hapus</button>
+						<button class="btn btn-center bg-brown-3 btn-rounded">Hapus Kriteria</button>
 					</a>
 				</div>
 			</div>
